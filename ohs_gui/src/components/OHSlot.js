@@ -25,7 +25,7 @@ class OHSlot extends Component {
     return (
       <div className={slotClass} onClick={e => this.props.toggleBooking(this.props.id)}>
         {this.state.booked ? null : <FontAwesomeIcon className="fa-plus slot-info" icon="plus"/>}
-        {this.state.booked ? <h2 className="slot-info">Booked!</h2> : null}
+        {this.state.booked ? <h2 className="slot-info"></h2> : null}
       </div>
     );
   }
