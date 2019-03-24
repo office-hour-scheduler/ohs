@@ -8,7 +8,8 @@ class OHContainer extends Component {
     super(props);
 
     // TODO
-    var bookedSlots = new Array(this.props.slotNum);
+    //var bookedSlots = new Array(this.props.slotNum);
+    var bookedSlots = new Array(4);
     for (var i = 0; i < bookedSlots.length; ++i) { bookedSlots[i] = false; }
 
     this.state = { 
