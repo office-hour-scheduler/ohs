@@ -11,7 +11,10 @@ class OHSlot extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      booked: this.props.booked
+      booked: this.props.booked,
+      //TODO (Replace with individual slot values)
+      time: "12:00",
+      student: "Charizard"
     }
   }
 
@@ -24,6 +27,11 @@ class OHSlot extends Component {
     const slotClass = this.state.booked ? "book-button booked" : "book-button";
     return (
       <div className={slotClass} onClick={e => this.props.toggleBooking(this.props.id)}>
+      <div className="slotinfo">
+      Time : {this.state.time}
+      <br/>
+      Student : {this.state.student}
+      </div>
         {this.state.booked ? null : <FontAwesomeIcon className="fa-plus slot-info" icon="plus"/>}
         {this.state.booked ? <h2 className="slot-info">Booked!</h2> : null}
       </div>
