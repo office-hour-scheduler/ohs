@@ -8,36 +8,38 @@ class LectureSection extends Component {
   constructor(props) {
     super(props);
     this.state = {
+    //TODO: Get rows and nrows from backend
       nrows: 0,
       rows: [],
-      slotNum: 4,
-      ohrtable: null
+      slotNum: 4
     }
 console.log(this.state.slotNum)
     this.addSlots = this.addSlots.bind(this);
     this.addRows = this.addRows.bind(this)
+    this.removeRows = this.removeRows.bind(this)
 }
 
 addSlots() {
-//TODO Add slots to backend as well
-/*const ohtable = document.getElementById("ohrcontainer");
-const trow = document.createElement("tr");
-const newslot = document.createElement("div");
-newslot.className= "book-button";
-trow.appendChild(newslot);
-ohtable.appendChild(trow);*/
-
-const nslotNum = this.state.slotNum + 4;
-this.setState({slotNum : nslotNum});
-console.log(nslotNum);
+//TODO Add slots to backend as well...may not be implemented at the end
+    const nslotNum = this.state.slotNum + 4;
+    this.setState({slotNum : nslotNum});
+    console.log(nslotNum);
+}
+//TODO Add/Remove from backend persistence
+addRows(){
+    const addRows = this.state.rows;
+    const nRows = this.state.nrows + 1;
+    addRows.push(<OHContainer slotNum={this.state.slotNum}/>);
+    this.setState({rows : addRows});
+    this.setState({nrows : nRows});
 }
 
-addRows(){
-const addRows = this.state.rows;
-const nRows = this.state.nrows + 1;
-addRows.push(<OHContainer slotNum={4}/>);
-this.setState({rows : addRows});
-this.setState({nrows : nRows});
+removeRows(){
+    const removeRows = this.state.rows;
+    const nRows = this.state.nrows - 1;
+    removeRows.pop();
+    this.setState({rows : removeRows});
+    this.setState({nrows : nRows});
 }
 
   render() {
@@ -62,10 +64,13 @@ this.setState({nrows : nRows});
         )}
           <Button variant="primary" onClick={this.addRows}>
               Add Slots
-            </Button>
+          </Button>
+          <Button variant="primary" onClick={this.removeRows}>
+              Remove Slots
+          </Button>
          <table id="ohrcontainer">
           <tr>
-            {this.state.rows}
+            {rows}
            </tr>
          </table>
       </div>
@@ -87,7 +92,7 @@ this.setState({nrows : nRows});
         )}
          <table id="ohrcontainer">
           <tr>
-            {this.state.rows}
+            {rows}
            </tr>
          </table>
       </div>

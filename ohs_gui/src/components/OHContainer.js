@@ -9,14 +9,12 @@ class OHContainer extends Component {
 
     // TODO
     var bookedSlots = new Array(this.props.slotNum);
-    //var bookedSlots = new Array(4);
     for (var i = 0; i < bookedSlots.length; ++i) { bookedSlots[i] = false; }
 
     this.state = { 
       slotNum : this.props.slotNum,
       bookedSlots: bookedSlots
      }
-     console.log(this.props.slotNum);
      this.toggleBooking = this.toggleBooking.bind(this);
   }
 
