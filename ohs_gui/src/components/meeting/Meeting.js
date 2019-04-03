@@ -40,7 +40,6 @@ class Meeting extends Component {
     this.handleClose = this.handleClose.bind(this);
     this.handleShow = this.handleShow.bind(this);
     this.addNote = this.addNote.bind(this);
-    this.removeNote = this.removeNote.bind(this);
     this.cancelMeeting = this.cancelMeeting.bind(this);
     this.postponeMeeting = this.postponeMeeting.bind(this);
     this.minimizeNotes = this.minimizeNotes.bind(this);
