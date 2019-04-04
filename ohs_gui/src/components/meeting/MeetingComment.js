@@ -8,10 +8,10 @@ class MeetingComment extends PureComponent {
     const { comment, user } = this.props;
     
     let myComment;
-    if(user.firstName === comment.author.firstName && user.firstName === comment.author.lastName) {
-      myComment = false;
-    } else {
+    if(user.firstName === comment.author.firstName && user.lastName === comment.author.lastName) {
       myComment = true;
+    } else {
+      myComment = false;
     }
 
     return (
