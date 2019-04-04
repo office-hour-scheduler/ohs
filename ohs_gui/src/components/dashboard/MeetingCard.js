@@ -13,7 +13,7 @@ class MeetingCard extends PureComponent {
         <div className="meeting card-element">
           {dateFormat(new Date(meeting.startTime), 'mmmm dS, yyyy, h:MM TT')}
           <br />
-          <div>Meeting with </div>{isProf ? `${meeting.instructor.firstName} ${meeting.instructor.lastName}` : `${meeting.student.firstName} ${meeting.student.lastName}`}
+          <div>Meeting with </div>{!isProf ? `${meeting.instructor.firstName} ${meeting.instructor.lastName}` : `${meeting.student.firstName} ${meeting.student.lastName}`}
         </div>
       </Link>
     );
