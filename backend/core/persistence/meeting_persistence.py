@@ -250,7 +250,7 @@ class MeetingPersistence:
         c.execute(
             "SELECT * FROM meetings WHERE office_hour_id=%s AND start_time>=%s AND start_time<=%s"
             " ORDER BY start_time ASC",
-            (office_hour_id, range_start, range_end),
+            (str(office_hour_id), range_start, range_end),
         )
         meetings = c.fetchall()
         if len(meetings) > 0:
