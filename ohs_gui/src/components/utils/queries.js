@@ -152,6 +152,15 @@ const GET_OFFICE_HOURS_BY_SECTION_AND_WEEKDAY = gql`
   }
 `;
 
+const GET_MEETINGS_BY_OFFICE_HOUR_AND_TIME = gql`
+  query getMeetingsByOfficeHour($officeHourId: UUID!, $startTime: Int!, $endTime: Int!) {
+    meetings(officeHourId: $officeHourId, startTime: $startTime, endTime: $endTime) {
+      meetingId
+      index
+    }
+  }
+`;
+
 export {
   GET_COURSES,
   GET_SECTIONS,
@@ -160,5 +169,6 @@ export {
   GET_UPCOMING_MEETINGS,
   GET_SECTIONS_FOR_STUDENT,
   GET_MEETINGS,
-  GET_OFFICE_HOURS_BY_SECTION_AND_WEEKDAY
+  GET_OFFICE_HOURS_BY_SECTION_AND_WEEKDAY,
+  GET_MEETINGS_BY_OFFICE_HOUR_AND_TIME
 };

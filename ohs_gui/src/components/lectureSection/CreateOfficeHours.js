@@ -113,7 +113,7 @@ class CreateOfficeHours extends Component {
         "numStudents": section["numStudents"],
         "taughtBy": section["taughtBy"]["userName"]
       },
-	    "weekday": day
+      "weekday": day
     }
     const mutVariables = {
       "sectionInput": {

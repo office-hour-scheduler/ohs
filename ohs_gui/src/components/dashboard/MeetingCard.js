@@ -8,15 +8,15 @@ class MeetingCard extends PureComponent {
   render() {
     const { meeting, isProf } = this.props;
     return (
-      <Link to={`/meeting/${meeting.id}`}>
+      <Link to={`/meeting/${meeting.meetingId}`}>
         <div className="meeting card-element">
           {meeting.courseCode}
           <br />
-          {dateFormat(new Date(meeting.time), 'mmmm dS, yyyy, h:MM TT')}
+          {meeting.time && dateFormat(new Date(meeting.time), 'mmmm dS, yyyy, h:MM TT')}
           <br />
           {meeting.room}
           <br />
-          {isProf ? meeting.student : meeting.professor}
+          {isProf ? meeting.student.firstName + " " + meeting.student.lastName : meeting.instructor.firstName + " " + meeting.instructor.lastName}
         </div>
       </Link>
     );

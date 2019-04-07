@@ -54,7 +54,7 @@ class MeetingPersistence:
 
     def get_notes_of_meeting(self, meeting_id: uuid.UUID) -> List[Note]:
         c = self.connection.cursor()
-        c.execute("SELECT * FROM notes WHERE meeting_id=%s", (str(meeting_id)))
+        c.execute("SELECT * FROM notes WHERE meeting_id=%s", (str(meeting_id),))
         notes = c.fetchall()
         if len(notes) > 0:
             notes = map(
@@ -145,7 +145,7 @@ class MeetingPersistence:
 
     def get_comments_of_meeting(self, meeting_id: uuid.UUID) -> List[Comment]:
         c = self.connection.cursor()
-        c.execute("SELECT * FROM comments WHERE meeting_id=%s", (str(meeting_id)))
+        c.execute("SELECT * FROM comments WHERE meeting_id=%s", (str(meeting_id),))
         comments = c.fetchall()
         if len(comments) > 0:
             comments = map(lambda x: self._res_to_comment(x), comments)
@@ -166,7 +166,7 @@ class MeetingPersistence:
             c = self.connection.cursor()
             term = (
                 str(meeting.meeting_id),
-                meeting.office_hour_id,
+                str(meeting.office_hour_id),
                 meeting.index,
                 meeting.instructor.user_name,
                 meeting.student.student_number,
@@ -213,7 +213,7 @@ class MeetingPersistence:
 
     def get_meeting(self, meeting_id: uuid.UUID) -> Option[Meeting]:
         c = self.connection.cursor()
-        c.execute("SELECT * FROM meetings WHERE meeting_id=%s", (str(meeting_id)))
+        c.execute("SELECT * FROM meetings WHERE meeting_id=%s", (str(meeting_id),))
         meeting = None
         res = c.fetchone()
         if res:
@@ -250,7 +250,7 @@ class MeetingPersistence:
         c.execute(
             "SELECT * FROM meetings WHERE office_hour_id=%s AND start_time>=%s AND start_time<=%s"
             " ORDER BY start_time ASC",
-            (office_hour_id, range_start, range_end),
+            (str(office_hour_id), range_start, range_end),
         )
         meetings = c.fetchall()
         if len(meetings) > 0:
