@@ -45,7 +45,7 @@ class MeetingPersistence:
 
     def get_note(self, note_id: uuid.UUID) -> Option[Note]:
         c = self.connection.cursor()
-        c.execute("SELECT * FROM notes WHERE note_id=%s", (str(note_id)))
+        c.execute("SELECT * FROM notes WHERE note_id=%s", (str(note_id),))
         note = None
         res = c.fetchone()
         if res:
@@ -67,7 +67,7 @@ class MeetingPersistence:
         if not self.get_note(note_id):
             return Err(f"Note {note_id} does not exist")
         c = self.connection.cursor()
-        c.execute("DELETE FROM notes WHERE note_id=%s", (str(note_id)))
+        c.execute("DELETE FROM notes WHERE note_id=%s", (str(note_id),))
         self.connection.commit()
         return Ok(note_id)
 
@@ -82,7 +82,7 @@ class MeetingPersistence:
                 term = (
                     str(comment.comment_id),
                     str(comment.meeting_id),
-                    comment.author,
+                    comment.author.user_name,
                     None,
                     comment.time_stamp,
                     comment.content_text,
@@ -92,7 +92,7 @@ class MeetingPersistence:
                     str(comment.comment_id),
                     str(comment.meeting_id),
                     None,
-                    comment.author,
+                    comment.author.student_number,
                     comment.time_stamp,
                     comment.content_text,
                 )
@@ -136,7 +136,7 @@ class MeetingPersistence:
 
     def get_comment(self, comment_id: uuid.UUID) -> Option[Comment]:
         c = self.connection.cursor()
-        c.execute("SELECT * FROM comments WHERE comment_id=%s", (str(comment_id)))
+        c.execute("SELECT * FROM comments WHERE comment_id=%s", (str(comment_id),))
         comment = None
         res = c.fetchone()
         if res:
@@ -155,7 +155,7 @@ class MeetingPersistence:
         if not self.get_comment(comment_id):
             return Err(f"Comment {comment_id} does not exist")
         c = self.connection.cursor()
-        c.execute("DELETE FROM comments WHERE comment_id=%s", (str(comment_id)))
+        c.execute("DELETE FROM comments WHERE comment_id=%s", (str(comment_id),))
         self.connection.commit()
         return Ok(comment_id)
 
@@ -261,7 +261,7 @@ class MeetingPersistence:
         if not self.get_meeting(meeting_id):
             return Err(f"Meeting {meeting_id} does not exist")
         c = self.connection.cursor()
-        c.execute("DELETE FROM meetings WHERE meeting_id=%s", (str(meeting_id)))
+        c.execute("DELETE FROM meetings WHERE meeting_id=%s", (str(meeting_id),))
         self.connection.commit()
         return Ok(meeting_id)
 
