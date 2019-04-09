@@ -237,15 +237,14 @@ return (
                 aria-describedby="basic-addon2"
                 onChange={this.contentChanged}
               />
-              <Mutation mutation={CREATE_COMMENT} variables={{meetingId:id, contentText}} >
-              {(createComment) => {
-
-              return (<Button variant="primary" onClick={createComment}>
-                Submit
-              </Button>
-              );
-              }}
-              </Mutation>
+              <Mutation mutation={CREATE_COMMENT}
+               variables={{meetingId:id, contentText}}
+               update={(cache, { data: { addComment } }) => {
+                 const address = { query: GET_MEETING, variables={{meetingId: id}} }
+                 const data = cache.readQuery(address);
+                 data.meeting.comments.push(addComment);
+                 cache.writeQuery({...address, data});
+               }}/>
             </FormGroup>
 
            </form>
@@ -278,7 +277,9 @@ return (
             <Modal.Title>Add Note</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <textarea onChange={this.noteTextChange} className="note-input" ref="noteInput" />
+            <textarea onChange={this.noteTextChange} className="note-input" ref="noteInput" >
+              Notes
+             </textarea>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleClose}>
@@ -286,7 +287,6 @@ return (
             </Button>
             <Mutation mutation={CREATE_NOTE} variables={{id, noteText}}>
             {(createNote) => {
-            this.setState({notes: notes.push(createNote)});
             return(
             <Button variant="primary" onClick={createNote}>
               Save
