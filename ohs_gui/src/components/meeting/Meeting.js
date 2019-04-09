@@ -238,7 +238,7 @@ return (
               <Mutation mutation={CREATE_COMMENT}
                variables={{meetingId:id, contentText}}
                update={(cache, { data: { addComment } }) => {
-                 const address = { query: GET_MEETING, variables={{"meetingId": id}} }
+                 const address = { query: GET_MEETING, variables: {{"meetingId": id}} };
                  const data = cache.readQuery(address);
                  data.meeting.comments.push(addComment);
                  cache.writeQuery({...address, data});
@@ -286,7 +286,7 @@ return (
             <Mutation mutation={CREATE_NOTE}
              variables={{id, noteText}}
              update={(cache, { data: { addNote } }) => {
-                 const address = { query: GET_MEETING, variables={{"meetingId": id}} }
+                 const address = { query: GET_MEETING, variables: {{"meetingId": id}} };
                  const data = cache.readQuery(address);
                  data.meeting.notes.push(addNote);
                  cache.writeQuery({...address, data});
