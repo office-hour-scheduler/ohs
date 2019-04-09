@@ -290,7 +290,7 @@ return (
                  const data = cache.readQuery(address);
                  data.meeting.notes.push(addNote);
                  cache.writeQuery({...address, data});
-             >
+                 }}>
             {(createNote) => {
             return(
             <Button variant="primary" onClick={createNote}>
