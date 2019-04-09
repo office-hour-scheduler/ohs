@@ -70,19 +70,7 @@ class BookMeetings extends Component {
   }
 
   dateChange(date) {
-    // TODO: query backend for all office hours and their corresponding meetings
-    const officeHours = [
-      {
-        startTime: moment('2019-04-16T15:00:00.000Z').format('h:mm'),
-        meetings: [true, true, false, true, false, true]
-      },
-      {
-        startTime: moment('2019-04-16T18:00:00.000Z').format('h:mm'),
-        meetings: [false, true, true, true, false, false]
-      }
-    ];
-
-    this.setState({ date, officeHours });
+    this.setState({ date });
   }
 
   toggleBooking(instructor, officeHourId, startTime) {

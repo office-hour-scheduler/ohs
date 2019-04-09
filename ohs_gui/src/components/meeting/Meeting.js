@@ -228,7 +228,11 @@ return (
           <div className="new-comment">
 
 
-          <form onSubmit={e => this.createComment(e)}>
+              <Mutation mutation={CREATE_COMMENT} variables={{meetingId:id, contentText}} >
+              {(createComment) => {
+
+              return (
+            <form onSubmit={(e) => {e.preventDefault(); createComment();}}>
             <FormGroup role="form">
               <FormControl
                 ref="commentInput"
@@ -236,19 +240,14 @@ return (
                 aria-label="Comment"
                 aria-describedby="basic-addon2"
                 onChange={this.contentChanged}
-              />
-              <Mutation mutation={CREATE_COMMENT} variables={{meetingId:id, contentText}} >
-              {(createComment) => {
-
-              return (<Button variant="primary" onClick={createComment}>
+              /><Button variant="primary" onClick={createComment}>
                 Submit
               </Button>
+           </FormGroup>
+           </form>
               );
               }}
               </Mutation>
-            </FormGroup>
-
-           </form>
           </div>
         </div>
         {isProf && showNotes && (
