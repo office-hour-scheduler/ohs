@@ -285,7 +285,14 @@ return (
             <Button variant="secondary" onClick={this.handleClose}>
               Close
             </Button>
-            <Mutation mutation={CREATE_NOTE} variables={{id, noteText}}>
+            <Mutation mutation={CREATE_NOTE}
+             variables={{id, noteText}}
+             update={(cache, { data: { addNote } }) => {
+                 const address = { query: GET_MEETING, variables={{meetingId: id}} }
+                 const data = cache.readQuery(address);
+                 data.meeting.notes.push(addNote);
+                 cache.writeQuery({...address, data});
+             >
             {(createNote) => {
             return(
             <Button variant="primary" onClick={createNote}>
