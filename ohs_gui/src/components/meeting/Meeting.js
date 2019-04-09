@@ -147,13 +147,13 @@ return (
 
   postponeMeeting() {
     // TODO: delay meeting in backend
-  /*  if (window.confirm('Are you sure you want to postpone this meeting?')) {
+    if (window.confirm('Are you sure you want to postpone this meeting?')) {
       const { meeting } = this.state;
       const time = new Date(meeting.time);
       time.setTime(time.getTime() + 1000 * 60 * 60);
       meeting.time = time.toISOString();
-      this.setState({ meeting });*/
-    
+      this.setState({ meeting });
+    }
   }
 
   minimizeNotes(e) {
