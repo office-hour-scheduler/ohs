@@ -209,7 +209,7 @@ return (
           <MeetingInfo
             meeting={meeting}
             isProf={isProf}
-            cancelMeeting={()}
+            cancelMeeting={this.cancelMeeting}
             postponeMeeting={this.postponeMeeting}
           />
           <div className="meeting-comments">
