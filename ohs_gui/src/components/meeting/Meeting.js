@@ -132,9 +132,7 @@ return (
 
 
   cancelMeeting(meetingId) {
-    console.log(meetingId, this);
-
-     if (window.confirm('Are you sure you want to cancel this meeting?')) {
+    /* if (window.confirm('Are you sure you want to cancel this meeting?')) {
         return(
         <Mutation mutation={DELETE_MEETING} variables={{meetingId}}
         onCompleted={ () => {
@@ -142,7 +140,7 @@ return (
        }}
         />
         );
-     }
+     }*/
   }
 
   postponeMeeting() {
