@@ -153,7 +153,7 @@ return (
       time.setTime(time.getTime() + 1000 * 60 * 60);
       meeting.time = time.toISOString();
       this.setState({ meeting });*/
-    }
+    
   }
 
   minimizeNotes(e) {
@@ -211,7 +211,7 @@ return (
           <MeetingInfo
             meeting={meeting}
             isProf={isProf}
-            cancelMeeting={this.cancelMeeting}
+            cancelMeeting={()}
             postponeMeeting={this.postponeMeeting}
           />
           <div className="meeting-comments">
