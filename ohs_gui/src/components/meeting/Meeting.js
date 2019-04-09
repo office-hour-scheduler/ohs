@@ -7,7 +7,6 @@ import { withRouter } from 'react-router-dom';
 import { Button, FormGroup, FormControl, Modal } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { Query, Mutation } from 'react-apollo';
-import { Redirect } from 'react-router'
 
 import MeetingNote from './MeetingNote';
 import MeetingComment from './MeetingComment';
@@ -132,15 +131,18 @@ return (
 
 
   cancelMeeting(meetingId) {
-    /* if (window.confirm('Are you sure you want to cancel this meeting?')) {
-        return(
-        <Mutation mutation={DELETE_MEETING} variables={{meetingId}}
-        onCompleted={ () => {
-          <Redirect to='/'>;
-       }}
-        />
-        );
-     }*/
+    console.log(meetingId, this);
+
+    // if (window.confirm('Are you sure you want to cancel this meeting?')) {
+    //    return(<Mutation mutation={DELETE_MEETING} variables={{meetingId}}
+    //    onCompleted={ () => {
+
+    //    }}
+    //    >
+    //    </Mutation>
+    //    // TODO: redirect out of meeting into courses page
+    //    );
+    // }
   }
 
   postponeMeeting() {
@@ -235,14 +237,15 @@ return (
                 aria-describedby="basic-addon2"
                 onChange={this.contentChanged}
               />
-              <Mutation mutation={CREATE_COMMENT}
-               variables={{meetingId:id, contentText}}
-               update={(cache, { data: { addComment } }) => {
-                 const address = { query: GET_MEETING, variables: {"meetingId": id} };
-                 const data = cache.readQuery(address);
-                 data.meeting.comments.push(addComment);
-                 cache.writeQuery({...address, data});
-               }}/>
+              <Mutation mutation={CREATE_COMMENT} variables={{meetingId:id, contentText}} >
+              {(createComment) => {
+
+              return (<Button variant="primary" onClick={createComment}>
+                Submit
+              </Button>
+              );
+              }}
+              </Mutation>
             </FormGroup>
 
            </form>
@@ -275,23 +278,15 @@ return (
             <Modal.Title>Add Note</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <textarea onChange={this.noteTextChange} className="note-input" ref="noteInput" >
-              Notes
-             </textarea>
+            <textarea onChange={this.noteTextChange} className="note-input" ref="noteInput" />
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleClose}>
               Close
             </Button>
-            <Mutation mutation={CREATE_NOTE}
-             variables={{id, noteText}}
-             update={(cache, { data: { addNote } }) => {
-                 const address = { query: GET_MEETING, variables: {"meetingId": id} };
-                 const data = cache.readQuery(address);
-                 data.meeting.notes.push(addNote);
-                 cache.writeQuery({...address, data});
-                 }}>
+            <Mutation mutation={CREATE_NOTE} variables={{id, noteText}}>
             {(createNote) => {
+            this.setState({notes: notes.push(createNote)});
             return(
             <Button variant="primary" onClick={createNote}>
               Save
