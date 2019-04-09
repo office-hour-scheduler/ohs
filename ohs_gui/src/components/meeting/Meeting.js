@@ -135,12 +135,12 @@ return (
     console.log(meetingId, this);
 
      if (window.confirm('Are you sure you want to cancel this meeting?')) {
-        return(<Mutation mutation={DELETE_MEETING} variables={{meetingId}}
+        return(
+        <Mutation mutation={DELETE_MEETING} variables={{meetingId}}
         onCompleted={ () => {
           <Redirect to='/'>;
        }}
-        >
-        </Mutation>
+        />
         );
      }
   }
