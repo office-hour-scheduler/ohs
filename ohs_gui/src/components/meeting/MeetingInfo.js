@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react';
 import { Button } from 'react-bootstrap';
-import { Redirect } from 'react-router'
-
 
 // TO DO - Change this to import to be consistent
 const dateFormat = require('dateformat');
@@ -27,17 +25,7 @@ class MeetingInfo extends PureComponent {
             <Button
               className="cancel-meeting"
               variant="danger"
-              onClick={()=>{
-               if (window.confirm('Are you sure you want to cancel this meeting?')) {
-               return( //Delete meeting and return to dashboard
-                    <Mutation mutation={DELETE_MEETING} variables={{meetingId}}
-                    onCompleted={ () => {
-                        <Redirect to='/'/>;
-                    }}
-                    />
-                );
-                }
-             }}
+              onClick={()=>cancelMeeting(meeting.meetingId)}
             >
               Cancel Meeting
             </Button>
