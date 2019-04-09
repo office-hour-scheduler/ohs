@@ -13,7 +13,7 @@ class MeetingInfo extends PureComponent {
       <div className="meeting-info">
         {meeting && (
           <>
-            <h2>Meeting with {isProf ? `${meeting.instructor.firstName} ${meeting.instructor.lastName}` : `${meeting.student.firstName} ${meeting.student.lastName}`}</h2>
+            <h2>Meeting with {isProf ? `${meeting.student.firstName} ${meeting.student.lastName}` : `${meeting.instructor.firstName} ${meeting.instructor.lastName}`}</h2>
             {dateFormat(new Date(meeting.startTime), 'mmmm dS, yyyy, h:MM TT')}
             <Button
               className="postpone-meeting"
