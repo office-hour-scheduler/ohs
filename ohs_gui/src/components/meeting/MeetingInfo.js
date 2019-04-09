@@ -32,7 +32,7 @@ class MeetingInfo extends PureComponent {
                return( //Delete meeting and return to dashboard
                     <Mutation mutation={DELETE_MEETING} variables={{meetingId}}
                     onCompleted={ () => {
-                        <Redirect to='/'>;
+                        <Redirect to='/'/>;
                     }}
                     />
                 );
